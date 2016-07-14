@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cart play - backbonejs</title>
+	<link rel="stylesheet" href="bower_components/pure/pure-min.css">
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+
+	<style>
+		ul.pure-g { padding-left: 0;}
+		#ecommerce { width: 1200px; margin: 0 auto;}
+		.title { border-bottom: 1px #ddd solid;}
+		.clothes li { text-align: center; margin-bottom: 30px; position: relative; overflow: hidden;}
+		.clothes h4 { margin-bottom: 8px;}
+		.clothes img { display: block; margin: 0 auto; }
+		.clothes figure { margin-bottom: 13px; border-bottom: 2px transparent solid;}
+		.clothes figure:hover { border-bottom: 2px #666 solid; cursor: pointer;}
+		.show-popup { margin-top: 10px;}
+		.popup {
+			position: absolute;
+			bottom: -100%;
+			width: 99%;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			transition: ease .5s all;
+		}
+		.popup .close {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.popup .close:hover {
+			cursor: pointer;
+		}
+		.hide { display: none;}
+		.top-bar {
+			background-color: #000;
+			padding: 7px 0;
+		}
+		.top-bar:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+		.alert-success {
+			background: #84FF51;
+			padding: 8px;
+			color: #fff;
+		}
+		.shopping-bag {
+			width: 340px;
+			background-color: #ddd;
+			padding: 15px;
+			position: absolute;
+			z-index: 9999;
+			top: 34px;
+			right: 20px;
+			display: none;
+		}
+		.shopping-bag h3 { margin-top: 0;}
+		.shopping-bag .name {
+			font-weight: 700;
+			font-size: 1.2em;
+			color: #333;
+		}
+		#your-item {
+			padding-left: 0;
+			margin-bottom: 0;
+		}
+		#your-item li, .total {
+			list-style: none;
+			border-bottom: 1px solid #666;
+			font-size: .9em;
+			color: #666;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+			position: relative;
+		}
+		.total {
+			border: none;
+		}
+		#your-item .remove {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		.close-shopping-bag {
+			position: absolute;
+			bottom: -36px;
+			right: 0;
+			background: #ddd;
+			padding: 10px;
+			font-size: .9em;
+		}
+		#your-item .remove:hover, .close-shopping-bag:hover {
+			cursor: pointer;
+		}
+		#your-item .price, .total-price {
+			color: #333;
+			font-weight: 700;
+			float: right;
+		}
+		.show-shopping-bag {
+			color: #fff;
+			float: right;
+			margin-right: 20px;
+			position: relative;
+		}
+		.show-shopping-bag:hover {
+			cursor: pointer;
+		}
+		.show-shopping-bag span {
+			font-size: 10px;
+			position: absolute;
+			background: tomato;
+			padding: 3px 6px;
+			top: -6px;
+			right: -12px;
+			border-radius: 50%;
+			display: none;
+		}
+	</style>
+</head>
+<body id="cartplay">
+	<div class="top-bar">
+		<strong class="show-shopping-bag">Shopping Bag<span>0</span></strong>
+		<div class="shopping-bag">
+			<span class="close-shopping-bag">Close</span>
+			<h3>Shopping Bag</h3>
+			<ul id="your-item"></ul>
+			<div class="total">Total: <span class="total-price">0</span></div>
+		</div><!-- .shopping-bag -->
+	</div>
+	<div id="ecommerce">
+		<h2 class="title">Shop this look</h2>
+
+		<ul class="pure-g clothes">
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/GRACELESS-M-S.jpg" alt=""></figure>
+				<h4 class="product-name1">Felt Fedora</h4>
+				<span class="price">$39.95 AUD</span><br />
+				<span class="hide" id="price1">39.95</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour1">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size1">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty1">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="1">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/HAT_BLACK-M-S.jpg" alt=""></figure>
+				<h4 class="product-name2">Cameo Graceless Skirt</h4>
+				<span class="price">$69.90 AUD</span><br />
+				<span class="hide" id="price2">69.90</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour2">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size2">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty2">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="2">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/HAT_BURGUNDY-M-S.jpg" alt=""></figure>
+				<h4 class="product-name3">Cameo Take Flight Bustier</h4>
+				<span class="price">$12.45 AUD</span><br />
+				<span class="hide" id="price3">12.45</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour3">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size3">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty3">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="3">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/PINK-M-S.jpg" alt=""></figure>
+				<h4 class="product-name4">Sweet Darling Playsuit</h4>
+				<span class="price">$50.00 AUD</span><br />
+				<span class="hide" id="price4">50.00</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour4">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size4">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty4">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="4">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/GRACELESS-M-S.jpg" alt=""></figure>
+				<h4 class="product-name5">Take a Bow Playsuit</h4>
+				<span class="price">$105.70 AUD</span><br />
+				<span class="hide" id="price5">105.70</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour5">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size5">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty5">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="5">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/HAT_BLACK-M-S.jpg" alt=""></figure>
+				<h4 class="product-name6">Cameo With Fire Dress</h4>
+				<span class="price">$39.95 AUD</span><br />
+				<span class="hide" id="price6">39.95</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour6">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size6">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty6">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="6">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/HAT_BURGUNDY-M-S.jpg" alt=""></figure>
+				<h4 class="product-name7">Bumper Car Crop Black</h4>
+				<span class="price">$48.98 AUD</span><br />
+				<span class="hide" id="price7">48.98</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour7">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size7">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty7">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="7">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+			<li class="pure-u-1-4">
+				<figure title="Add to bag"><img src="images/PINK-M-S.jpg" alt=""></figure>
+				<h4 class="product-name8">Cameo The Range Pullover</h4>
+				<span class="price">$78.09 AUD</span><br />
+				<span class="hide" id="price8">78.09</span>
+				<button class="pure-button show-popup">Add</button>
+
+				<div class="popup pure-form">
+					<span class="close">X</span>
+					<p>
+						<label for="">Colour</label>
+						<select id="colour8">
+							<option value="Black">Black</option>
+							<option value="Pink">Pink</option>
+							<option value="Blue">Blue</option>
+							<option value="Tomato">Tomato</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Size</label>
+						<select id="size8">
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+						</select>
+					</p>
+					<p>
+						<label for="">Qty</label>
+						<select id="qty8">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</p>
+					<p>
+						<button class="pure-button add-to-bag" data-id="8">Add to Bag</button>
+					</p>
+				</div><!-- /.popup -->
+			</li>
+		</ul>
+		
+	</div><!-- /#ecommerce -->
+	
+	<script id="shopping-bag-item" type="text/template">
+		<li class="item<%= id_product %>">
+			<span class="remove" data-id="<%= id %>">X</span>
+			<span class="name"><%= name %></span><br />
+			Colour: <span class="colour"><%= colour %></span>, Size: <span class="size"><%= size %></span>, Qty: <span class="qty"><%= qty %></span><br />
+			Price: <span class="price">$<%= totalPrice %> AUD</span><br />
+		</li>
+	</script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/underscore/underscore.js"></script>
+	<script src="bower_components/backbone/backbone.js"></script>
+	<script src="bower_components/backbone.localstorage/backbone.localStorage-min.js"></script>
+
+	<script src="js/app.js"></script>
+</body>
+</html>

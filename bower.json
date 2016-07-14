@@ -1,0 +1,31 @@
+{
+  "name": "Cart Play",
+  "version": "0.0.1",
+  "authors": [
+    "isatrio <isatrio.is.me@gmail.com>"
+  ],
+  "description": "Cart play using backbonejs",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "e-commerce"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone-localstorage": "~0.3.1",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.0",
+    "pure": "~0.4.2",
+    "purecss": "~0.4.2"
+  }
+}
