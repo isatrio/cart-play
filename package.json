@@ -1,0 +1,28 @@
+{
+  "name": "cart-play",
+  "version": "1.0.0",
+  "description": "A simple shopping cart SPA. Standard function, add and remove product form cart with little bit animation. To run this project just follow command below.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isatrio/cart-play.git"
+  },
+  "author": "Yudhi Satrio <isatrio.is.me@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isatrio/cart-play/issues"
+  },
+  "homepage": "https://github.com/isatrio/cart-play#readme",
+  "dependencies": {
+    "backbone": "^1.4.0",
+    "backbone-localstorage": "^0.3.2",
+    "backbone.localstorage": "^2.0.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.0",
+    "pure": "^2.85.0",
+    "purecss": "^1.0.1"
+  }
+}
