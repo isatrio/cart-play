@@ -3,7 +3,7 @@
 var apparel = Backbone.Model.extend();
 var apparels = Backbone.Collection.extend({
 	model: apparel,
-    localStorage: true,// new Backbone.LocalStorage('cart'),
+    localStorage: new Backbone.LocalStorage('cart'),
 });
 
 var cart = new apparels();
